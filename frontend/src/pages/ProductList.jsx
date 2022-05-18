@@ -5,8 +5,28 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 function ProductList() {
+  const location = useLocation();
+  //useLocation returns an object contains bunch of properties, but access only pathname and then split
+  //{pathname: '/products/men', search: '', hash: '', state: null, key: 'fvkfoga3'}
+  //location.pathname.split("/")[2] will return only me fron url pathname
+  const category = location.pathname.split("/")[2];
+  // console.log(location.pathname.split("/")[2]);
+
+  const [filter, setFilter] = useState({});
+
+  const handleFilter = (event) => {
+    const value = event.target.value;
+    setFilter({
+      //if we don't pass spread operator filter here it will only setFilter individual one every time user select option size and color
+      ...filter,
+      [event.target.value]: value,
+    });
+  };
+  console.log(filter);
   return (
     <Container>
       <Navbar />
@@ -17,10 +37,8 @@ function ProductList() {
       <FilterContain>
         <Filter>
           <FilterText>Filter Products: </FilterText>{" "}
-          <Select>
-            <Option disabled selected>
-              Color
-            </Option>
+          <Select name="color" onChange={handleFilter}>
+            <Option disabled>Color</Option>
             <Option>White</Option>
             <Option>Black</Option>
             <Option>Red</Option>
@@ -28,10 +46,8 @@ function ProductList() {
             <Option>Yellow</Option>
             <Option>Green</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Size
-            </Option>
+          <Select name="size" onChange={handleFilter}>
+            <Option disabled>Size</Option>
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>
@@ -43,7 +59,7 @@ function ProductList() {
         <Filter>
           <FilterText>Sort Products: </FilterText>
           <Select>
-            <Option selected>Newest</Option>
+            <Option>Newest</Option>
             <Option>Price (asc)</Option>
             <Option>Price (desc)</Option>
           </Select>
