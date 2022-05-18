@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const CategoryItem = ({ item }) => {
   return (
     <Container>
+      {/* <Link></Link> */}
       <Image src={item.img} />
       <Info>
         <Title>{item.title}</Title>
