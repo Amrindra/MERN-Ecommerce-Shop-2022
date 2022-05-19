@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { popularProducts } from "../data";
 import ProductItem from "./ProductItem";
 
-const Products = () => {
+const Products = ({ category, filters, sort }) => {
+  // console.log(category, filters, sort);
   return (
     <Container>
       {popularProducts.map((item) => (

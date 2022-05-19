@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
+// import Announcement from "../components/Announcement";
+// import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import { mobile } from "../responsive";
@@ -12,31 +12,34 @@ function ProductList() {
   const location = useLocation();
   //useLocation returns an object contains bunch of properties, but access only pathname and then split
   //{pathname: '/products/men', search: '', hash: '', state: null, key: 'fvkfoga3'}
-  //location.pathname.split("/")[2] will return only me fron url pathname
+  //location.pathname.split("/")[2] will return only "men" from the url pathname
   const category = location.pathname.split("/")[2];
   // console.log(location.pathname.split("/")[2]);
 
-  const [filter, setFilter] = useState({});
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
 
   const handleFilter = (event) => {
     const value = event.target.value;
-    setFilter({
+    setFilters({
       //if we don't pass spread operator filter here it will only setFilter individual one every time user select option size and color
-      ...filter,
-      [event.target.value]: value,
+      ...filters,
+      [event.target.name]: value,
     });
+    console.log("[event.target.name]:" + [event.target.name]);
   };
-  console.log(filter);
+  console.log(filters);
+
   return (
     <Container>
-      <Navbar />
-      <Announcement />
+      {/* <Navbar />
+      <Announcement /> */}
 
       <Title>Dresses</Title>
 
       <FilterContain>
         <Filter>
-          <FilterText>Filter Products: </FilterText>{" "}
+          <FilterText>Filter Products: </FilterText>
           <Select name="color" onChange={handleFilter}>
             <Option disabled>Color</Option>
             <Option>White</Option>
@@ -58,15 +61,15 @@ function ProductList() {
 
         <Filter>
           <FilterText>Sort Products: </FilterText>
-          <Select>
-            <Option>Newest</Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+          <Select onChange={(event) => setSort(event.target.value)}>
+            <Option value="newest">Newest</Option>
+            <Option value="asc">Price (asc)</Option>
+            <Option value="desc">Price (desc)</Option>
           </Select>
         </Filter>
       </FilterContain>
 
-      <Products />
+      <Products category={category} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>

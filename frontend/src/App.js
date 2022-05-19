@@ -5,6 +5,8 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import SingleProduct from "./pages/SingleProduct";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Announcement from "./components/Announcement";
 
 function App() {
   const user = true;
@@ -13,7 +15,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="products/:category" element={<ProductList />} />
+        <Route
+          path="products/:category"
+          element={
+            <>
+              <Navbar />
+              <Announcement />
+              <ProductList />
+            </>
+          }
+        />
         <Route path="product/:id" element={<SingleProduct />} />
 
         <Route
