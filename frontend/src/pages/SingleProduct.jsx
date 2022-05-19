@@ -16,8 +16,6 @@ function SingleProduct() {
   const productID = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
 
-  useEffect;
-
   return (
     <Container>
       <Navbar />
@@ -30,12 +28,11 @@ function SingleProduct() {
         <InfoContainer>
           <Title>Lorem ipsum</Title>
           <Desc>
-            {" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
             venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
             iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
             tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.{" "}
+            condimentum ac, volutpat ornare.
           </Desc>
           <Price>$20</Price>
 

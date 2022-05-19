@@ -6,7 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Product = ({ item }) => {
+const ProductItem = ({ item }) => {
   return (
     <Container>
       <Circle />
@@ -93,4 +93,4 @@ const Icon = styled.div`
   }
 `;
 
-export default Product;
+export default ProductItem;
