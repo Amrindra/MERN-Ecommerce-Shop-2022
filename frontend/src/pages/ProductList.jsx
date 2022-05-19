@@ -35,7 +35,7 @@ function ProductList() {
       {/* <Navbar />
       <Announcement /> */}
 
-      <Title>Dresses</Title>
+      <Title>{category}</Title>
 
       <FilterContain>
         <Filter>

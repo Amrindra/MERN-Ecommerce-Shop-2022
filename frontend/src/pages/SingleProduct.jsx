@@ -5,8 +5,19 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function SingleProduct() {
+  const location = useLocation();
+  //useLocation returns an object contains bunch of properties, but access only pathname and then split
+  //{pathname: '/products/men', search: '', hash: '', state: null, key: 'fvkfoga3'}
+  //location.pathname.split("/")[2] will return only "men" from the url pathname
+  const productID = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+
+  useEffect;
+
   return (
     <Container>
       <Navbar />

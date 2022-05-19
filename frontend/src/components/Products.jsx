@@ -69,6 +69,7 @@ const Products = ({ category, filters, sort }) => {
             //.slice(0,8) will show only 8 products
             .slice(0, 8)
             .map((item) => <ProductItem item={item} key={item.id} />)}
+      {/* {popularProducts.map((item) => <ProductItem item={item} key={item.id} />)} */}
     </Container>
   );
 };

@@ -6,7 +6,8 @@ const { verifyTokenAndAdmin } = require("./verifyToken");
 const Product = require("../models/Product");
 
 //CREATE PRODUCT and ONLY ADMIN CAN CREATE PRODUCT
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
+// router.post("/", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
