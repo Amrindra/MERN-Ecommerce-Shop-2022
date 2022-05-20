@@ -7,14 +7,28 @@ import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
 
 function SingleProduct() {
-  const location = useLocation();
   //useLocation returns an object contains bunch of properties, but access only pathname and then split
   //{pathname: '/products/men', search: '', hash: '', state: null, key: 'fvkfoga3'}
   //location.pathname.split("/")[2] will return only "men" from the url pathname
+  const location = useLocation();
   const productID = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        //publicRequest is a custom request we created in another folder. by doing this we don't have to write axios every single request
+        const response = await publicRequest.get("/products/find" + productID);
+        setProduct(response.data);
+        console.log(response);
+      } catch (error) {}
+    };
+    getProduct();
+    console.log(product);
+  }, [productID]);
 
   return (
     <Container>
@@ -22,36 +36,28 @@ function SingleProduct() {
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src={product.img} />
         </ImgContainer>
 
         <InfoContainer>
-          <Title>Lorem ipsum</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
-          </Desc>
-          <Price>$20</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>${product.price}</Price>
 
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+              {product.color.map((eachColor) => (
+                <FilterColor color={eachColor} key={eachColor} />
+              ))}
             </Filter>
 
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+                {product.size.map((eachSize) => (
+                  <FilterSizeOption key={eachSize}>{eachSize}</FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>

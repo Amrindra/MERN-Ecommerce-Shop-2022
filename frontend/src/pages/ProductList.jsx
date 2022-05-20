@@ -79,6 +79,8 @@ function ProductList() {
 const Container = styled.div``;
 
 const Title = styled.h1`
+  text-transform: capitalize;
+  padding-left: 15px;
   ${mobile({ textAlign: "center" })}
 `;
 
