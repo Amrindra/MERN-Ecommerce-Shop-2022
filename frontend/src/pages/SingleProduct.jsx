@@ -21,7 +21,7 @@ function SingleProduct() {
     const getProduct = async () => {
       try {
         //publicRequest is a custom request we created in another folder. by doing this we don't have to write axios every single request
-        const response = await publicRequest.get("/products/find" + productID);
+        const response = await publicRequest.get("/products/find/" + productID);
         setProduct(response.data);
         console.log(response);
       } catch (error) {}
@@ -47,7 +47,8 @@ function SingleProduct() {
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              {product.color.map((eachColor) => (
+              {/* Have to add ? infront of array otherwise it will throw an error */}
+              {product.color?.map((eachColor) => (
                 <FilterColor color={eachColor} key={eachColor} />
               ))}
             </Filter>
@@ -55,7 +56,7 @@ function SingleProduct() {
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize>
-                {product.size.map((eachSize) => (
+                {product.size?.map((eachSize) => (
                   <FilterSizeOption key={eachSize}>{eachSize}</FilterSizeOption>
                 ))}
               </FilterSize>

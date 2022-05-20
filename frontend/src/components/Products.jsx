@@ -57,18 +57,18 @@ const Products = ({ category, filters, sort }) => {
         [...prev].sort((x, y) => y.price - x.price)
       );
     }
-  });
+  }, [sort]);
 
   return (
     <Container>
       {category
         ? filteredProducts.map((item) => (
-            <ProductItem item={item} key={item.id} />
+            <ProductItem item={item} key={item._id} />
           ))
         : products
             //.slice(0,8) will show only 8 products
             .slice(0, 8)
-            .map((item) => <ProductItem item={item} key={item.id} />)}
+            .map((item) => <ProductItem item={item} key={item._id} />)}
       {/* {popularProducts.map((item) => <ProductItem item={item} key={item.id} />)} */}
     </Container>
   );
