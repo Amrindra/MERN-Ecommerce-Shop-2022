@@ -16,6 +16,9 @@ function SingleProduct() {
   const location = useLocation();
   const productID = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     const getProduct = async () => {
@@ -29,6 +32,17 @@ function SingleProduct() {
     getProduct();
     console.log(product);
   }, [productID]);
+
+  const handleQuantity = (type) => {
+    if (type === "decrease") {
+      //QTY: cannot be smaller than 1
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleClick = () => {};
 
   return (
     <Container>
@@ -49,7 +63,11 @@ function SingleProduct() {
               <FilterTitle>Color</FilterTitle>
               {/* Have to add ? infront of array otherwise it will throw an error */}
               {product.color?.map((eachColor) => (
-                <FilterColor color={eachColor} key={eachColor} />
+                <FilterColor
+                  color={eachColor}
+                  key={eachColor}
+                  onClick={() => setColor(eachColor)}
+                />
               ))}
             </Filter>
 
@@ -57,7 +75,12 @@ function SingleProduct() {
               <FilterTitle>Size</FilterTitle>
               <FilterSize>
                 {product.size?.map((eachSize) => (
-                  <FilterSizeOption key={eachSize}>{eachSize}</FilterSizeOption>
+                  <FilterSizeOption
+                    key={eachSize}
+                    onChange={(event) => setSize(event.target.value)}
+                  >
+                    {eachSize}{" "}
+                  </FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>
@@ -65,12 +88,12 @@ function SingleProduct() {
 
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={() => handleQuantity("decrease")} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => handleQuantity("increase")} />
             </AmountContainer>
 
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
