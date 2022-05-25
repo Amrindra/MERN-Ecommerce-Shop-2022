@@ -1,10 +1,14 @@
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingBasketOutlined } from "@material-ui/icons";
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
 function Navbar() {
+  //This state.cart is from Redux store
+  // const cart = useSelector((state) => state.cart);
+
   return (
     <Container>
       <Wrapper>
