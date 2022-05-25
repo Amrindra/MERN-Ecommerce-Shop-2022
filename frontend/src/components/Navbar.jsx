@@ -6,8 +6,8 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 
 function Navbar() {
-  //This state.cart is from Redux store
-  // const cart = useSelector((state) => state.cart);
+  //This state.cart is accessing the state inside the Redux store
+  const cart = useSelector((state) => state.cart);
 
   return (
     <Container>
