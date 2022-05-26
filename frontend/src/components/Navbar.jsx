@@ -1,4 +1,5 @@
 import { Badge } from "@material-ui/core";
+// import { Badge } from "@mui/material";
 import { Search, ShoppingBasketOutlined } from "@material-ui/icons";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -6,8 +7,10 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 
 function Navbar() {
-  //This state.cart is accessing the state inside the Redux store
-  const cart = useSelector((state) => state.cart);
+  //This state.cart is accessing the cart state inside the Redux store
+  //state.cart.quantity meaning that we wanted to get only quantity from the cartSlice initial state
+  const cartQuantity = useSelector((state) => state.cart.cartQuantity);
+  // console.log(quantity)
 
   return (
     <Container>
@@ -28,7 +31,11 @@ function Navbar() {
           <MenuItem>REGISTER</MenuItem>
           <MenuItem>SIGN IN</MenuItem>
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
+            <Badge
+              badgeContent={cartQuantity}
+              color="primary"
+              verlap="rectangular"
+            >
               <ShoppingBasketOutlined />
             </Badge>
           </MenuItem>

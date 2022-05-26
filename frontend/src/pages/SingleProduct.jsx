@@ -8,6 +8,8 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
+import { addProduct } from "../redux/cartSlice";
+import { useDispatch } from "react-redux";
 
 function SingleProduct() {
   //useLocation returns an object contains bunch of properties, but access only pathname and then split
@@ -16,9 +18,11 @@ function SingleProduct() {
   const location = useLocation();
   const productID = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
-  const [quantity, setQuantity] = useState(1);
+  const [productQuantity, setProductQuantity] = useState(1);
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -26,7 +30,7 @@ function SingleProduct() {
         //publicRequest is a custom request we created in another folder. by doing this we don't have to write axios every single request
         const response = await publicRequest.get("/products/find/" + productID);
         setProduct(response.data);
-        console.log(response);
+        // console.log(response);
       } catch (error) {}
     };
     getProduct();
@@ -34,16 +38,21 @@ function SingleProduct() {
   }, [productID]);
 
   const handleQuantity = (type) => {
-    if (type === "decrease") {
+    if (type === "decrement") {
       //QTY: cannot be smaller than 1
-      quantity > 1 && setQuantity(quantity - 1);
+      productQuantity > 1 && setProductQuantity(productQuantity - 1);
     } else {
-      setQuantity(quantity + 1);
+      setProductQuantity(productQuantity + 1);
     }
   };
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    // "...product, quantity, color, size" all of these call payload
+    //Once we click add to cart button it will dispatch the action and then add these payload to the cartSlice initialState product
+    dispatch(addProduct({ ...product, productQuantity, color, size }));
+  };
 
+  console.log("size: ", +size + "  Color: " + color);
   return (
     <Container>
       <Navbar />
@@ -73,14 +82,9 @@ function SingleProduct() {
 
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
+              <FilterSize onChange={(event) => setSize(event.target.value)}>
                 {product.size?.map((eachSize) => (
-                  <FilterSizeOption
-                    key={eachSize}
-                    onChange={(event) => setSize(event.target.value)}
-                  >
-                    {eachSize}{" "}
-                  </FilterSizeOption>
+                  <FilterSizeOption key={eachSize}>{eachSize}</FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>
@@ -88,9 +92,9 @@ function SingleProduct() {
 
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={() => handleQuantity("decrease")} />
-              <Amount>{quantity}</Amount>
-              <Add onClick={() => handleQuantity("increase")} />
+              <Remove onClick={() => handleQuantity("decrement")} />
+              <Amount>{productQuantity}</Amount>
+              <Add onClick={() => handleQuantity("increment")} />
             </AmountContainer>
 
             <Button onClick={handleClick}>ADD TO CART</Button>
