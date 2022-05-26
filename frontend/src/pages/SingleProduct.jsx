@@ -30,7 +30,7 @@ function SingleProduct() {
         //publicRequest is a custom request we created in another folder. by doing this we don't have to write axios every single request
         const response = await publicRequest.get("/products/find/" + productID);
         setProduct(response.data);
-        // console.log(response);
+        console.log(response);
       } catch (error) {}
     };
     getProduct();
