@@ -5,11 +5,20 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import StripeCheckout from "react-stripe-checkout";
+import { useState } from "react";
 
 const Cart = () => {
+  const KEY = process.env.REACT_APP_STRIPE;
   const cart = useSelector((state) => state.cart);
-  // console.log(cart);
 
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  console.log(stripeToken);
   return (
     <Container>
       <Navbar />
@@ -87,7 +96,18 @@ const Cart = () => {
               <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
 
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name="Shop"
+              image="https://cdn2.vectorstock.com/i/1000x1000/17/61/male-avatar-profile-picture-vector-10211761.jpg"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </BottomSection>
       </Wrapper>
