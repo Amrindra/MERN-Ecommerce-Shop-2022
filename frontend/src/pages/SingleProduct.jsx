@@ -52,7 +52,8 @@ function SingleProduct() {
     dispatch(addProduct({ ...product, productQuantity, color, size }));
   };
 
-  console.log("size: ", +size + "  Color: " + color);
+  // console.log("size: ", +size + "  Color: " + color);
+  // console.log(product.size);
   return (
     <Container>
       <Navbar />

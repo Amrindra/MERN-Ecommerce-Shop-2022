@@ -3,6 +3,7 @@ import { Badge } from "@material-ui/core";
 import { Search, ShoppingBasketOutlined } from "@material-ui/icons";
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -30,15 +31,17 @@ function Navbar() {
         <RightSide>
           <MenuItem>REGISTER</MenuItem>
           <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge
-              badgeContent={cartQuantity}
-              color="primary"
-              verlap="rectangular"
-            >
-              <ShoppingBasketOutlined />
-            </Badge>
-          </MenuItem>
+          <Link to="/cart">
+            <MenuItem>
+              <Badge
+                badgeContent={cartQuantity}
+                color="primary"
+                verlap="rectangular"
+              >
+                <ShoppingBasketOutlined />
+              </Badge>
+            </MenuItem>
+          </Link>
         </RightSide>
       </Wrapper>
     </Container>
