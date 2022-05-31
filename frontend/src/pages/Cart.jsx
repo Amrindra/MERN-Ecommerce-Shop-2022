@@ -25,13 +25,15 @@ const Cart = () => {
     const makeRequest = async () => {
       try {
         const response = await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken,
+          tokenId: stripeToken.id,
           amount: cart.total * 100,
         });
+        // {data: response.data } contains stripe information
         navigate.push("/success", { data: response.data });
       } catch (error) {}
     };
-    makeRequest();
+    //given a condition to make a request only when stripeToken is exists
+    stripeToken && makeRequest();
   }, [stripeToken, cart.total, navigate]);
 
   console.log(stripeToken);

@@ -7,6 +7,7 @@ import SingleProduct from "./pages/SingleProduct";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Announcement from "./components/Announcement";
+import Success from "./pages/Success";
 
 function App() {
   const user = true;
@@ -36,6 +37,7 @@ function App() {
           element={<>{user ? <Navigate to="/" /> : <Login />}</>}
         />
         <Route path="cart" element={<Cart />} />
+        <Route path="success" element={<Success />} />
       </Routes>
     </BrowserRouter>
   );

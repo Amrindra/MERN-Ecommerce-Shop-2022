@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-function Sucess() {
+function Success() {
   const location = useLocation();
   return <div>Sucess</div>;
 }
 
-export default Sucess;
+export default Success;
