@@ -1,15 +1,24 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
 const Login = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
 
         <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
+          <Input
+            placeholder="username"
+            onChange={(event) => setUserName(event.target.value)}
+          />
+          <Input
+            placeholder="password"
+            onChange={(event) => setPassword(event.target.value)}
+          />
           <Button>LOGIN</Button>
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
