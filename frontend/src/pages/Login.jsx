@@ -1,10 +1,19 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    login(dispatch, { userName, password });
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -19,7 +28,7 @@ const Login = () => {
             placeholder="password"
             onChange={(event) => setPassword(event.target.value)}
           />
-          <Button>LOGIN</Button>
+          <Button onClick={handleLogin}>LOGIN</Button>
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>

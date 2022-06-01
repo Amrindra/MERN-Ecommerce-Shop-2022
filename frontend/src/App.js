@@ -10,7 +10,7 @@ import Announcement from "./components/Announcement";
 import Success from "./pages/Success";
 
 function App() {
-  const user = true;
+  const user = false;
 
   return (
     <BrowserRouter>
