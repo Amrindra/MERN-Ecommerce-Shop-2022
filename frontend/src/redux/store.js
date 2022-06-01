@@ -8,7 +8,7 @@
 
 //TO UNDERSTAND MORE ABOUT PERSISTSTORE REDUX TOOLKIT VISIT: https://redux-toolkit.js.org/usage/usage-guide
 
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
 import userReducer from "./userSlice";
 import {
@@ -29,10 +29,12 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: { cart: cartReducer, user: persistedReducer },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "2d" }
+      { expiresIn: "20m" }
     );
 
     //Using spread operator to take out only password because we don't want to have password show in the database it's for safety
