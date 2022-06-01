@@ -8,9 +8,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Announcement from "./components/Announcement";
 import Success from "./pages/Success";
+import { useSelector } from "react-redux";
 
 function App() {
-  const user = false;
+  //accessing the currentUser in the redux store. if there is a user redirect to the homepage if not redirect to login
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <BrowserRouter>
