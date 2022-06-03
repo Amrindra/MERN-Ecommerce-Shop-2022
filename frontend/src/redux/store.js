@@ -23,12 +23,14 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+//persist from redux is used to store information in the browser even though we refresh the page or open another page it will still store in the browser
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
 };
 
+//Combining reducers userReducer and cartReducer
 const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -26,7 +26,7 @@ function ProductList() {
       ...filters,
       [event.target.name]: value,
     });
-    console.log("[event.target.name]:" + [event.target.name]);
+    // console.log("[event.target.name]:" + [event.target.name]);
   };
   console.log(filters);
 

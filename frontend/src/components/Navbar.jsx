@@ -24,9 +24,11 @@ function Navbar() {
           </SearchContainer>
         </LeftSide>
 
-        <Center>
-          <Logo>SHOP</Logo>
-        </Center>
+        <Link to="/">
+          <Center>
+            <Logo>SHOP</Logo>
+          </Center>
+        </Link>
 
         <RightSide>
           <MenuItem>REGISTER</MenuItem>

@@ -1,0 +1,14 @@
+:root {
+  --webkit-box-showdow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  --box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  --sidebar-color: purple;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+  text-decoration: none;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
