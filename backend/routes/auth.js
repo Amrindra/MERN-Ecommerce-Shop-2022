@@ -62,10 +62,10 @@ router.post("/login", async (req, res) => {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "20m" }
+      { expiresIn: "1h" }
     );
 
-    //Using spread operator to take out only password because we don't want to have password show in the database it's for safety
+    //Using spread operator to take out only password because we don't want to have password show in the browser it's for safety
     //By implementing this, password won't show in the DB. Even though password has been hashed, but we shouldn't reveal password in the DB
     //_doc is from DB,
     const { password, ...others } = user._doc;
