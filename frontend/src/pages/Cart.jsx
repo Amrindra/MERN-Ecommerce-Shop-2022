@@ -9,17 +9,27 @@ import StripeCheckout from "react-stripe-checkout";
 import { useState, useEffect } from "react";
 import { userRequest } from "../requestMethods";
 import { Link, useNavigate } from "react-router-dom";
+import { removeProduct } from "../redux/cartSlice";
+import { useDispatch } from "react-redux";
+
 
 const Cart = () => {
   const KEY = process.env.REACT_APP_STRIPE;
+  //use useSelector hook to get data from redux global store. Now cart is containing product data
   const cart = useSelector((state) => state.cart);
 
+console.log("Cart" + cart);
   const [stripeToken, setStripeToken] = useState(null);
+  // const [productQty, setProductQty] = useState(cart.products.price)
+// console.log("productQTY: " + productQty);
+
   const navigate = useNavigate();
 
   const onToken = (token) => {
     setStripeToken(token);
   };
+
+
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -36,7 +46,15 @@ const Cart = () => {
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, navigate]);
 
-  console.log(stripeToken);
+  // console.log(stripeToken);
+
+  const dispatch = useDispatch();
+
+  const handleRemove = (id)=>{
+    dispatch(removeProduct())
+  }
+
+
   return (
     <Container>
       <Navbar />
@@ -71,7 +89,7 @@ const Cart = () => {
         <BottomSection>
           <Info>
             {cart.products.map((product) => (
-              <Product>
+              <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
                   <Details>
@@ -95,7 +113,7 @@ const Cart = () => {
                     <Add />
                       <ProductAmount>{product.productQuantity}</ProductAmount>
                     <Remove />
-                    <Delete style={{color: "red", cursor: "pointer", marginLeft: "10px"}}/>
+                    <Delete onClick={()=>handleRemove("id")} style={{color: "red", cursor: "pointer", marginLeft: "10px"}}/>
                   </ProductAmountContainer>
 
                   <ProductPrice>

@@ -5,7 +5,7 @@ const Announcement = () => {
 };
 const Container = styled.div`
   height: 30px;
-  background-color: teal;
+  background-color: black;
   color: white;
   display: flex;
   justify-content: center;

@@ -25,14 +25,14 @@ const Slider = () => {
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
-            <ImageContainer>
-              <Image src={item.img} />
-            </ImageContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
               <Button>SHOW NOW</Button>
             </InfoContainer>
+            <ImageContainer>
+              <Image src={item.img} />
+            </ImageContainer>
           </Slide>
         ))}
       </Wrapper>
@@ -87,7 +87,7 @@ const Title = styled.h1`
 `;
 
 const Desc = styled.p`
-  margin: 50px 0px;
+  margin: 30px 0px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;

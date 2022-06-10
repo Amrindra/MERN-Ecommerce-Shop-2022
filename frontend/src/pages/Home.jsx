@@ -12,8 +12,8 @@ function Home() {
       <Announcement />
       <Navbar />
       <Slider />
-      <Categories />
       <Products />
+      <Categories />
       <Newsletter />
       <Footer />
     </div>
