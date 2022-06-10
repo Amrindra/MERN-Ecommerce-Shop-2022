@@ -35,7 +35,7 @@ function SingleProduct() {
     };
     getProduct();
     console.log(product);
-  }, [productID]);
+  }, [productID, product]);
 
   const handleQuantity = (type) => {
     if (type === "decrement") {

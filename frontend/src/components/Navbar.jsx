@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
 
+
 function Navbar() {
   //This state.cart is accessing the cart state inside the Redux store
   //state.cart.quantity meaning that we wanted to get only quantity from the cartSlice initial state
@@ -17,7 +18,9 @@ function Navbar() {
     <Container>
       <Wrapper>
         <LeftSide>
+          <Link to="/">
             <Logo>SHOP</Logo>
+          </Link>
         </LeftSide>
 
         <Link to="/">

@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Delete, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
 import { useState, useEffect } from "react";
 import { userRequest } from "../requestMethods";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const KEY = process.env.REACT_APP_STRIPE;
@@ -46,12 +46,26 @@ const Cart = () => {
         <Title>YOUR BAG</Title>
 
         <TopSection>
-          <TopButtonSection>CONTINUE SHOPPING</TopButtonSection>
+          <Link to="/">
+            <TopButtonSection>CONTINUE SHOPPING</TopButtonSection>
+          </Link>
+
           <TopSectionTexts>
             <TopSectionText>Shopping Bag(2)</TopSectionText>
             <TopSectionText>Your Wishlist (0)</TopSectionText>
           </TopSectionTexts>
+          
+          <StripeCheckout
+              name="Shop"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
           <TopButtonSection type="filled">CHECKOUT NOW</TopButtonSection>
+            </StripeCheckout>
         </TopSection>
 
         <BottomSection>
@@ -79,9 +93,11 @@ const Cart = () => {
                 <PriceDetail>
                   <ProductAmountContainer>
                     <Add />
-                    <ProductAmount>{product.productQuantity}</ProductAmount>
+                      <ProductAmount>{product.productQuantity}</ProductAmount>
                     <Remove />
+                    <Delete style={{color: "red", cursor: "pointer", marginLeft: "10px"}}/>
                   </ProductAmountContainer>
+
                   <ProductPrice>
                     ${product.price * product.productQuantity}
                   </ProductPrice>
@@ -116,7 +132,6 @@ const Cart = () => {
 
             <StripeCheckout
               name="Shop"
-              image="https://cdn2.vectorstock.com/i/1000x1000/17/61/male-avatar-profile-picture-vector-10211761.jpg"
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total}`}
@@ -124,7 +139,7 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             >
-              <Button>CHECKOUT NOW</Button>
+              <Button style={{cursor: "pointer"}}>CHECKOUT NOW</Button>
             </StripeCheckout>
           </Summary>
         </BottomSection>
