@@ -155,7 +155,13 @@ console.log("Cart" + cart);
               token={onToken}
               stripeKey={KEY}
             >
-              <Button style={{cursor: "pointer"}}>CHECKOUT NOW</Button>
+
+              {/* Giving an condition if the total is empty then users can not check out */}
+            {
+              cart.total > 1 ? <Button style={{cursor: "pointer"}}>CHECKOUT NOW</Button> :
+              <Button style={{cursor: "not-allowed"}} disabled>CANNOT CHECKOUT</Button>
+            }
+              
             </StripeCheckout>
           </Summary>
         </BottomSection>

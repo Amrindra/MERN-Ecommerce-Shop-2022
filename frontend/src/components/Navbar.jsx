@@ -12,7 +12,6 @@ function Navbar() {
   //This state.cart is accessing the cart state inside the Redux store
   //state.cart.quantity meaning that we wanted to get only quantity from the cartSlice initial state
   const cartQuantity = useSelector((state) => state.cart.cartQuantity);
-  // console.log(quantity)
 
   return (
     <Container>
@@ -95,12 +94,13 @@ ${mobile({ width: "220px" })}
 `;
 
 const SearchContainer = styled.div`
-  border: 1px solid black;
+  border: 2px solid pink;
   border-radius: 10px;
   display: flex;
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+
 ${mobile({ display: "flex", alignItem: "center", justifyContent: "space-between"})}
 `;
 
