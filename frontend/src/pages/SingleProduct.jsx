@@ -1,15 +1,14 @@
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function SingleProduct() {
   //useLocation returns an object contains bunch of properties, but access only pathname and then split
@@ -23,6 +22,10 @@ function SingleProduct() {
   const [color, setColor] = useState("");
 
   const dispatch = useDispatch();
+
+  // const user = useSelector((state) => state.user.currentUser);
+  // const user = false;
+  // const navigate = useNavigate()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -47,9 +50,12 @@ function SingleProduct() {
   };
 
   const handleClick = () => {
+  
     // "...product, quantity, color, size" all of these call payload
     //Once we click add to cart button it will dispatch the action and then add these payload to the cartSlice initialState product
     dispatch(addProduct({ ...product, productQuantity, color, size }));
+  
+
   };
 
   // console.log("size: ", +size + "  Color: " + color);
@@ -57,7 +63,6 @@ function SingleProduct() {
   return (
     <Container>
       <Navbar />
-      <Announcement />
       <Wrapper>
         <ImgContainer>
           <Image src={product.img} />
@@ -97,8 +102,9 @@ function SingleProduct() {
               <Amount>{productQuantity}</Amount>
               <Add onClick={() => handleQuantity("increment")} />
             </AmountContainer>
-
-            <Button onClick={handleClick}>ADD TO CART</Button>
+          
+            <Button onClick={handleClick}>ADD TO CART</Button> 
+          
           </AddContainer>
         </InfoContainer>
       </Wrapper>

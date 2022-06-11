@@ -9,12 +9,13 @@ import styled from "styled-components";
 const ProductItem = ({ item }) => {
   return (
     <Container>
-      <Circle />
       <Image src={item.img} />
 
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+          <Link to="/cart">
+            <ShoppingCartOutlined />
+          </Link>
         </Icon>
 
         <Icon>
@@ -55,21 +56,15 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
+  background-color: #faddd4;
+  border-radius: 10px;
+  overflow: hidden;
   position: relative;
 
   /* If Info is used before defining, it will throw an error, so we have to define Info first */
   &:hover ${Info} {
     opacity: 0.7;
   }
-`;
-
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
 `;
 
 const Image = styled.img`

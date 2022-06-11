@@ -12,7 +12,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Announcement from "./components/Announcement";
 import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -33,31 +32,32 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="products/:category"
-          element={
-            <>
-              <Navbar />
-              <Announcement />
-              <ProductList />
-            </>
-          }
-        />
-        <Route path="product/:id" element={<SingleProduct />} />
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="products/:category"
+            element={
+              <>
+                <Navbar />
+                <ProductList />
+              </>
+            }
+          />
+          <Route path="product/:id" element={<SingleProduct />} />
 
-        <Route
-          path="register"
-          element={<>{user ? <Navigate to="/" /> : <Register />}</>}
-        />
-        <Route
-          path="login"
-          element={<>{user ? <Navigate to="/" /> : <Login />}</>}
-        />
-        <Route path="cart" element={<Cart />} />
-        <Route path="success" element={<Success />} />
-      </Routes>
+          <Route
+            path="register"
+            element={<>{user ? <Navigate to="/" /> : <Register />}</>}
+          />
+          <Route
+            path="login"
+            element={<>{user ? <Navigate to="/" /> : <Login />}</>}
+          />
+          <Route path="cart" element={<Cart />} />
+          <Route path="success" element={<Success />} />
+        </Routes>
+      </ScrollToTop>
     </BrowserRouter>
   );
 }

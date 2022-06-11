@@ -16,9 +16,7 @@ const Footer = () => {
       <Left>
         <Logo>SHOP</Logo>
         <Desc>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected
-          humour, or randomised words which don’t look even slightly believable.
+        Today and tomorrow,* up to a total savings of $100 on your Shop's purchases over the 2 days. *Subject to credit approval. Details
         </Desc>
 
         <SocialContainer>

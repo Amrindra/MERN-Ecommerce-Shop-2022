@@ -51,12 +51,13 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   ${mobile({ display: "none" })}
-`;
+  `;
 
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
   transition: all 1.5s ease;
+  color: #f9a0a0;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
@@ -96,8 +97,19 @@ const Desc = styled.p`
 const Button = styled.button`
   padding: 10px;
   font-size: 20px;
-  background-color: transparent;
+  background-color: #f9a0a0;
+  color: white;
+  border-radius: 50px;
+  width: 50%;
+  border: none;
   cursor: pointer;
+  transition: all 1s ease-in-out;
+
+
+  &:hover{
+    transform: scale(1.1);
+    transition: all 1s ease-in-out;
+  }
 `;
 
 const Arrow = styled.div`

@@ -35,8 +35,12 @@ function Navbar() {
 
         <RightSide>
           <SignInSignUpWrapper>
-            <MenuItem>SIGN UP</MenuItem>
-            <MenuItem>SIGN IN</MenuItem>
+            <Link to="/register">
+              <MenuItem>SIGN UP</MenuItem>
+            </Link>
+            <Link to="/login">
+              <MenuItem>SIGN IN</MenuItem>
+            </Link>
           </SignInSignUpWrapper>
           
           <Link to="/cart">

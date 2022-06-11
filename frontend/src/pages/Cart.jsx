@@ -1,7 +1,6 @@
 import { Add, Delete, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
@@ -51,14 +50,13 @@ console.log("Cart" + cart);
   const dispatch = useDispatch();
 
   const handleRemove = (id)=>{
-    dispatch(removeProduct())
+    dispatch(removeProduct(id))
   }
 
 
   return (
     <Container>
       <Navbar />
-      <Announcement />
 
       <Wrapper>
         <Title>YOUR BAG</Title>
@@ -113,7 +111,7 @@ console.log("Cart" + cart);
                     <Add />
                       <ProductAmount>{product.productQuantity}</ProductAmount>
                     <Remove />
-                    <Delete onClick={()=>handleRemove("id")} style={{color: "red", cursor: "pointer", marginLeft: "10px"}}/>
+                    <Delete onClick={()=>handleRemove(product._id)} style={{color: "red", cursor: "pointer", marginLeft: "10px"}}/>
                   </ProductAmountContainer>
 
                   <ProductPrice>
